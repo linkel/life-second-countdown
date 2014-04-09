@@ -10,9 +10,20 @@ int main()
     int remainingyears = 0;
     unsigned long int remsec = 0;
     int keypress = 0;
+    char userinput[100];
 
     printf("How old are you?\n");
-    scanf("%d", &age);
+    //Trying out fgets and sscanf instaed of scanf to prevent buffer overflow.
+    fgets(userinput, 4, stdin);
+    /*fgets takes the input from stdin as a string and stores it in userinput, which
+    is an array that holds chars. */
+    sscanf(userinput, "%d", &age);
+    /*sscanf here now reads from userinput and takes whatever is in it
+    in the format of %d, a double, then stores it in age. There is an address-of
+    operator in front of age because it takes a memory location of the variable, not
+    the name of the variable.*/
+    printf("You entered %d for your age.\n", age);
+    //scanf("%d", &age); //This is the old code, vulnerable to buffer overflow.
 
     remainingyears = avglife - age;
 
